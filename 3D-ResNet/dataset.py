@@ -1,11 +1,12 @@
 from datasets.kinetics import Kinetics
 from datasets.ucf101 import UCF101
 from datasets.hmdb51 import HMDB51
+from datasets.gibson_tiny import GIBSONTINY
 
 
 def get_training_set(opt, spatial_transform, temporal_transform,
                      target_transform):
-    assert opt.dataset in ['kinetics', 'ucf101', 'hmdb51']
+    assert opt.dataset in ['kinetics', 'ucf101', 'hmdb51', 'gibson_tiny']
 
     if opt.dataset == 'kinetics':
         training_data = Kinetics(
@@ -33,13 +34,22 @@ def get_training_set(opt, spatial_transform, temporal_transform,
             temporal_transform=temporal_transform,
             target_transform=target_transform,
             shot=opt.shot)
+    elif opt.dataset == 'gibson_tiny':
+        training_data = GIBSONTINY(
+            opt.video_path,
+            opt.annotation_path,
+            'training',
+            spatial_transform=spatial_transform,
+            temporal_transform=temporal_transform,
+            target_transform=target_transform,
+            shot=opt.shot)
 
     return training_data
 
 
 def get_validation_set(opt, spatial_transform, temporal_transform,
                        target_transform):
-    assert opt.dataset in ['kinetics', 'ucf101', 'hmdb51']
+    assert opt.dataset in ['kinetics', 'ucf101', 'hmdb51', 'gibsontiny']
 
     if opt.dataset == 'kinetics':
         validation_data = Kinetics(

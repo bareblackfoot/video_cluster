@@ -25,7 +25,7 @@ def val_epoch(epoch, data_loader, model, criterion, opt, logger, writer):
             data_time.update(time.time() - end_time)
 
             if not opt.no_cuda:
-                targets = targets.cuda(async=True)
+                targets = targets.cuda()
             if opt.dataset == "hmdb51":
                 targets -= 1
 
@@ -84,7 +84,7 @@ def val_final(data_loader, model, opt):
             inputs1, inputs2, inputs3, inputs4, inputs5, targets = inputs
 
             if not opt.no_cuda:
-                targets = targets.cuda(async=True)
+                targets = targets.cuda()
             if opt.dataset == "hmdb51":
                 targets -= 1
 

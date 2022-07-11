@@ -67,7 +67,7 @@ if __name__ == '__main__':
         json.dump(vars(opt), opt_file)
 
     writer = None
-    writer = SummaryWriter(log_dir='/home/ptokmako/src/LocalAggregation-Pytorch/summaries/3DResNet/' + model_name)
+    writer = SummaryWriter(log_dir='/home/blackfoot/codes/videoclusterD/3D-ResNet/tensorboard' + model_name)
 
     torch.manual_seed(opt.manual_seed)
 
