@@ -42,6 +42,27 @@ class TemporalBeginCrop(object):
         return out
 
 
+class TemporalEndCrop(object):
+    """Temporally crop the given frame indices at a encdding.
+
+    If the number of frames is less than the size,
+    loop the indices as many times as necessary to satisfy the size.
+
+    Args:
+        size (int): Desired output size of the crop.
+    """
+
+    def __init__(self, size):
+        self.size = size
+
+    def __call__(self, frame_indices):
+        out = frame_indices[-self.size:]
+
+        if len(frame_indices) < self.size:
+            out = [frame_indices[0]] * (self.size - len(frame_indices)) + frame_indices
+        return out
+
+
 class TemporalCenterCrop(object):
     """Temporally crop the given frame indices at a center.
 
