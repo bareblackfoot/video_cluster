@@ -199,8 +199,11 @@ class GIBSONTINY(data.Dataset):
         path = self.data[index]['video']
 
         frame_indices = self.data[index]['frame_indices']
-        if self.temporal_transform is not None:
-            frame_indices = self.temporal_transform(frame_indices)
+        # if self.temporal_transform is not None:
+        #     aa = self.temporal_transform(frame_indices)
+        frame_indices = frame_indices[-self.sample_duration:]
+        if len(frame_indices) < self.sample_duration:
+            frame_indices = np.concatenate([[frame_indices[0]] * (self.sample_duration - len(frame_indices)), frame_indices])
 
         target = self.data[index]
         if self.target_transform is not None:
